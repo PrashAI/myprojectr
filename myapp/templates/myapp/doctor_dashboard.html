@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Doctor Dashboard</title>
+</head>
+<body>
+    <h1>Welcome, Dr. {{ user.last_name }}!</h1>
+    <p>This is your doctor dashboard.</p>
+    <h2>Profile Information</h2>
+    <p><strong>First Name:</strong> {{ user.first_name }}</p>
+    <p><strong>Last Name:</strong> {{ user.last_name }}</p>
+    <p><strong>Profile Picture:</strong></p>
+    {% if user.profile_picture %}
+        <img src="{{ user.profile_picture.url }}" alt="Profile Picture" width="150">
+    {% else %}
+        <p>No profile picture uploaded.</p>
+    {% endif %}
+    <p><strong>Username:</strong> {{ user.username }}</p>
+    <p><strong>Email Id:</strong> {{ user.email }}</p>
+    <p><strong>Address:</strong></p>
+    <p>{{ user.address_line1 }}</p>
+    <p>{{ user.city }}</p>
+    <p>{{ user.state }}</p>
+    <p>{{ user.pincode }}</p>
+</body>
+</html>
+
