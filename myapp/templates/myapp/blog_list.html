@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blog List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .category {
+            margin-top: 30px;
+        }
+        .blog-post {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+        }
+        .blog-post h3 {
+            margin: 0;
+            color: #007BFF;
+        }
+        .blog-post img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        .blog-post p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    {% load static %}
+    <h1>Blog Posts</h1>
+    {% for category, blog_posts in blogs_by_category.items %}
+        <div class="category">
+            <h2>{{ category }}</h2>
+            {% if blog_posts %}
+                {% for blog_post in blog_posts %}
+                    <div class="blog-post">
+                        {% if blog_post.image %}
+                            <img src="{{ blog_post.image.url }}" alt="{{ blog_post.title }}">
+                        {% else %}
+                            <img src="{% static 'placeholder.png' %}" alt="No image available">
+                        {% endif %}
+                        <div>
+                            <h3>{{ blog_post.title }}</h3>
+                            <p>{{ blog_post.summary|truncatewords:15 }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No blog posts available.</p>
+            {% endif %}
+        </div>
+    {% endfor %}
+</body>
+</html>
